@@ -7,14 +7,12 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 def extract_polarity(data): 
     dataset_list = []
     sid = SentimentIntensityAnalyzer() 
-    for i,submission in enumerate(data): 
-        patient_list = list() 
-        neg,neu,pos = list(),list(),list()
-        for sent in sent_tokenize(submission):  
-            tmp = sid.polarity_scores(sent) 
-            neg.append(tmp['neg'])
-            neu.append(tmp['neu'])
-            pos.append(tmp['pos'])
-        dataset_list.append(pd.DataFrame(data={'neg':np.mean(neg),'neu':np.mean(neu),'pos':np.mean(pos)},index=[i])) 
-    output = pd.concat(dataset_list).to_numpy() 
-    return output 
+    patient_list = list() 
+    neg,neu,pos = list(),list(),list()
+    for sent in sent_tokenize(data):  
+        tmp = sid.polarity_scores(sent) 
+        neg.append(tmp['neg'])
+        neu.append(tmp['neu'])
+        pos.append(tmp['pos'])
+    data = pd.DataFrame(data={'neg':np.mean(neg),'neu':np.mean(neu),'pos':np.mean(pos)},index=[0]).to_numpy()
+    return data 
