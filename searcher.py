@@ -32,7 +32,7 @@ def create_bearer_token(data):
 
 def main(): 
     ramenSearcher = TweetAPI()
-    output = ramenSearcher.search("pokemon")
+    output = ramenSearcher.search("digimon movie")
     print(output)
 
 

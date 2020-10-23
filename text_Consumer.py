@@ -20,7 +20,7 @@ def tweet_process(tweet):
     return pd.DataFrame.from_dict({'id':[id],'content':[content]},orient='columns'),fin_senti
 if __name__ == "__main__": 
     #load  example output of twitter text 
-    sampleDoc = eval(open('example.json','r').read() ) # didn't write properly loading as dict 
+    sampleDoc = eval(open('other2.txt','r').read() ) # didn't write properly loading as dict 
     aggregators ={'neg':list(),'neu':list(),'pos':list()}
     print("Aggregating sentiments")
     for e in sampleDoc['statuses']: 
