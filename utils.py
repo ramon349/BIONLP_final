@@ -13,6 +13,6 @@ def extract_polarity(data):
         tmp = sid.polarity_scores(sent) 
         neg.append(tmp['neg'])
         neu.append(tmp['neu'])
-        pos.append(tmp['pos'])
-    data = pd.DataFrame(data={'neg':np.mean(neg),'neu':np.mean(neu),'pos':np.mean(pos)},index=[0]).to_numpy()
+        pos.append(tmp['pos']) 
+    data = [np.mean(neg),np.mean(neu),np.mean(pos)]
     return data 
