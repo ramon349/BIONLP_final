@@ -8,3 +8,7 @@ Project task is
 # todo 
 1.  Gary will do the classifier 
 2.  Ramon will work on streaming component using dummy classifier 
+3.  100 annotations completed by
+   Gary
+   ???? (TODO)
+4. IAAA (Gary)
