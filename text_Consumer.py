@@ -29,16 +29,16 @@ def main_three():
     print(f"TEXT:  {sample_tweet.text}")
 #main for when testing mongo for now 
 def main_two():
-    import services.mongo_setup as mongo_setup 
-    import services.data_service as data_service
-    mongo_setup.global_init() 
-    sampleDoc = eval(open('other2.txt','r').read() ) # didn't write properly loading as dict 
+    #import services.mongo_setup as mongo_setup 
+    #import services.data_service as data_service
+    #mongo_setup.global_init() 
+    sampleDoc = eval(open('example.json','r').read() ) # didn't write properly loading as dict 
     aggregators ={'neg':list(),'neu':list(),'pos':list()}
     print("Aggregating sentiments")
     for i,e in enumerate(sampleDoc['statuses']): 
         print(f"Adding status {i}-----")
         id,content,fin_senti = tweet_process(e) 
-        data_service.create_finding(id,content,fin_senti)
+        #data_service.create_finding(id,content,fin_senti)
         print(f"Done adding stauts {i}-----")
 if __name__ == "__main__":  
-    main_three()
+    main_two()

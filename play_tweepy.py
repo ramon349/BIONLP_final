@@ -34,7 +34,7 @@ def main():
     api = tweepy.API(auth)
     myListen = MyStreamListener() 
     myStream = tweepy.Stream(auth=api.auth,listener=myListen)
-    myStream.filter(track=['debate']) #term we'll be tracking. Using debate  currently for the sake of simplicity 
+    myStream.filter(track=['breast','cancer']) #term we'll be tracking. Using debate  currently for the sake of simplicity 
 if __name__=="__main__":
     mongo_setup.global_init()
     main()
