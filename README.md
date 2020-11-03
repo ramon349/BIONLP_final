@@ -8,3 +8,5 @@ Project task is
 # todo 
 1.  Gary will do the classifier 
 2.  Ramon will work on streaming component using dummy classifier 
+3.  Annotate the first 100 tweets
+4. IAAA (Gary)
