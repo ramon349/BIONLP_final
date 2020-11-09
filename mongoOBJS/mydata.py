@@ -8,7 +8,7 @@ import mongoengine
 class tweetData(mongoengine.Document):  
     tweetID=  mongoengine.StringField(required=True)
     text = mongoengine.StringField(required=True)
-    mood = mongoengine.StringField(required=True)
+    report = mongoengine.StringField(required=True)
     meta = {
         'db_alias':'core',
         'collection':'samples'

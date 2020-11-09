@@ -7,7 +7,7 @@ import json
 import time 
 import numpy as np 
 import pandas as pd 
-sentiments = ['neg','neu','pos']
+sentiments = ['noReport','selfReport']
 
 def tweet_process(tweet): 
     """  takes a tweet runs it through a simple sentiment analyzer. returns the id and content in a dataframe 
@@ -15,6 +15,7 @@ def tweet_process(tweet):
     """
     id = str(tweet['id'])
     content = tweet['text'] 
+    breakpoint()
     sentimet =  extract_polarity(content)  
     fin_senti = sentiments[np.argmax(sentimet)]
     return (id,content,fin_senti) 
