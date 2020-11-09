@@ -10,10 +10,13 @@ Project task is
 2.  Ramon will work on streaming component using dummy classifier 
 
 # How to use the non-bert classifier
-use 
-filename = 'adaForest11_9_2020.pickle'
-model = pickle.load(open(filename, 'rb'))
-model.predict(test_rows)
+open annotateTheUnannotatedDataset
 
-where test_rows is a pandas dataframe with "Text" as one of the column names.
-it outputs either a 1  (self report) or 0 (not self report)
+copy and paste code from it
+
+the pipeline has a few dependencies, like the vectorizer that you see in the notebook
+
+if you're using jupyter notebook, you can get away with running
+%run annotateTheUnannotatedDataset.ipynb
+
+in your notebook. This will run the notebook as if you had imported the whole damn thing
