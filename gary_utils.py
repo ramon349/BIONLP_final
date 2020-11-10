@@ -17,6 +17,15 @@ import nltk
 
 word_clusters = {}
 st = stopwords.words('english')
+
+def loadDataAsDataFrame(f_path):
+    '''
+        Given a path, loads a data set and puts it into a dataframe
+        - simplified mechanism
+    '''
+    df = pd.read_csv(f_path)
+    return df
+
 def preprocess_text(raw_text):
 
     # Replace/remove username
