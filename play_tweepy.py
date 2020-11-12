@@ -16,7 +16,7 @@ class MyStreamListener(tweepy.StreamListener):
         super().__init__()
         self.classy = classy
     def on_status(self, status):
-        """  Stream in tweets and add them to the database 
+        """  Stream  tweets and add them to the database 
 
         """
         rep = status._json
