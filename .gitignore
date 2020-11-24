@@ -2,3 +2,6 @@ access.sh
 config.yaml 
 example.json
 __pycache__/
+.ipynb_checkpoints/
+.DS_Store 
+Breast_cancer_autolabeled_nonBert.csv

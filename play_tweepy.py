@@ -1,23 +1,24 @@
-from nltk import text
 import tweepy 
-import os
-import numpy as np 
-from utils import extract_polarity
 import services.mongo_setup as mongo_setup  #this sets up mongodb 
 import services.data_service as data_service #this handles adding elements to the database 
 from gary_utils import * 
 from vectorizers import myVectorizer,  text2pred
+import yaml 
 sentiments = ['noReport','selfReport']
 
 class MyStreamListener(tweepy.StreamListener):
-    """ This object handles reading twitters stream 
+    """ Listener object required for reading twitter data stream  
     """
-    def __init__(self,classy) -> None:
+    def __init__(self,classy):
+        """Takes a classifier object as input. 
+        classy: is an sklearn pipleine object that does text preprocessing
+         and classificaiton. 
+        """
         super().__init__()
         self.classy = classy
     def on_status(self, status):
         """  Stream  tweets and add them to the database 
-
+            status: tweepy object containing a tweets data 
         """
         rep = status._json
         (id,cont,fin_senti)= self.tweet_process(rep) #this does the sentiment analysis j
@@ -26,10 +27,11 @@ class MyStreamListener(tweepy.StreamListener):
     def on_error(self,status): 
         return status
     def tweet_process(self,tweet): 
-        """  takes a tweet runs it through a simple sentiment analyzer. returns the id and content in a dataframe 
+        """  takes a tweet runs it through a simple analyzer. returns the id and content in a dataframe 
         """
         id = str(tweet['id'])
         try: 
+            #some tweets have longer text. Attempt to extract it 
             content = tweet['extended_tweet']['full_text']
         except KeyError: 
             content = tweet['text']
@@ -37,13 +39,20 @@ class MyStreamListener(tweepy.StreamListener):
         return (id,content,output) 
 def main():
     #initialize using twitter api. these are my enviroment keys 
-    auth = tweepy.OAuthHandler(os.environ['API_KEY'], os.environ['API_SECRET_KEY'])
-    auth.set_access_token(os.environ['T_ACCESS'], os.environ['T_SECRET'])
+    f_path = 'config.yaml'
+    secrets= load_credentials(f_path)
+    auth = tweepy.OAuthHandler(secrets['API_KEY'], secrets['API_SECRET_KEY'])
+    auth.set_access_token(secrets['T_ACCESS'], secrets['T_SECRET'])
     api = tweepy.API(auth)
     classi = text2pred()
     myListen = MyStreamListener(classy=classi) 
     myStream = tweepy.Stream(auth=api.auth,listener=myListen)
-    myStream.filter(track=['breast cancer', 'breast lump','breast pain']) #term we'll be tracking. Using debate  currently for the sake of simplicity 
+    #each element on the search list is a single item .
+    myStream.filter(track=['breast cancer', 'breast lump','breast pain'])
+
+def load_credentials(f_path): 
+    with open(f_path) as f: 
+        return yaml.safe_load(f)
 if __name__=="__main__":
     mongo_setup.global_init()
     main()
